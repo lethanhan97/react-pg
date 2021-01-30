@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { themeVar } from "./context/apollo";
 import { useAuth } from "./context/auth";
+import { DefaultPage } from "./routes/default/DefaultPage";
 
 // Routes
 import HomePage from "./routes/home/HomePage";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" component={LoginPage}></Route>
         <ProtectedRoutes>
           <Route path="/home" component={HomePage}></Route>
+          <Route path="**" component={DefaultPage}></Route>
         </ProtectedRoutes>
 
         <Route
