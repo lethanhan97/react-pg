@@ -23,10 +23,17 @@ function App() {
       <pre>auth: {auth.token}</pre>
       <pre>theme: {theme}</pre>
       <Switch>
-        <Route path="/login" component={LoginPage}></Route>
+        <Route path="/login" exact={true} component={LoginPage}></Route>
         <ProtectedRoutes>
-          <Route path="/home" component={HomePage}></Route>
-          <Route path="**" component={DefaultPage}></Route>
+          <Switch>
+            <Route path="/home" exact={true} component={HomePage}></Route>
+            <Route
+              path="/not-found"
+              exact={true}
+              component={DefaultPage}
+            ></Route>
+            <Redirect to="/not-found" />
+          </Switch>
         </ProtectedRoutes>
 
         <Route
