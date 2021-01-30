@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReactiveVar } from "@apollo/client";
+import React from "react";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { themeVar } from "./context/apollo";
+import { useAuth } from "./context/auth";
+
+// Routes
+import HomePage from "./routes/home/HomePage";
+import LoginPage from "./routes/login/LoginPage";
 
 function App() {
+  const auth = useAuth();
+  const theme = useReactiveVar(themeVar);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <pre>auth: {auth.token}</pre>
+      <pre>theme: {theme}</pre>
+      <Switch>
+        <Route path="/login" component={LoginPage}></Route>
+        <ProtectedRoutes>
+          <Route path="/home" component={HomePage}></Route>
+        </ProtectedRoutes>
+
+        <Route
+          path="**"
+          render={() =>
+            auth.token === "" ? (
+              <Redirect to="/login"></Redirect>
+            ) : (
+              <Redirect to="/home"></Redirect>
+            )
+          }
+        ></Route>
+      </Switch>
+    </Router>
+  );
+}
+
+function ProtectedRoutes({ children }) {
+  const auth = useAuth();
+
+  return (
+    <Route
+      render={() =>
+        auth.token === "" ? <Redirect to="/login"></Redirect> : children
+      }
+    ></Route>
   );
 }
 
