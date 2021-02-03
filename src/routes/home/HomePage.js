@@ -1,21 +1,21 @@
-import React from "react";
-import { useAuth } from "../../context/auth";
-import { themeVar } from "../../context/apollo";
-import { useReactiveVar } from "@apollo/client";
+import React from 'react';
+import { useAuth } from '../../context/auth';
+import { themeVar } from '../../context/apollo';
+import { useReactiveVar } from '@apollo/client';
 
 function HomePage() {
   const auth = useAuth();
   const theme = useReactiveVar(themeVar);
 
   const logout = () => {
-    auth.setToken("");
+    auth.setToken('');
   };
 
   const toggleTheme = () => {
-    if (theme === "light") {
-      themeVar("dark");
+    if (theme === 'light') {
+      themeVar('dark');
     } else {
-      themeVar("light");
+      themeVar('light');
     }
   };
 

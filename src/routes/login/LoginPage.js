@@ -1,7 +1,7 @@
-import React from "react";
-import { useAuth } from "../../context/auth";
-import { v4 as uuid } from "uuid";
-import { Redirect } from "react-router-dom";
+import React from 'react';
+import { useAuth } from '../../context/auth';
+import { v4 as uuid } from 'uuid';
+import { Redirect } from 'react-router-dom';
 
 function LoginPage() {
   const auth = useAuth();
@@ -10,7 +10,7 @@ function LoginPage() {
     auth.setToken(uuid());
   };
 
-  if (auth.token !== "") {
+  if (auth.token !== '') {
     return <Redirect to="/home"></Redirect>;
   }
 

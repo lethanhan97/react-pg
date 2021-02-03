@@ -1,18 +1,18 @@
-import { useReactiveVar } from "@apollo/client";
-import React from "react";
+import { useReactiveVar } from '@apollo/client';
+import React from 'react';
 import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect,
-} from "react-router-dom";
-import { themeVar } from "./context/apollo";
-import { useAuth } from "./context/auth";
-import { DefaultPage } from "./routes/default/DefaultPage";
+  Redirect
+} from 'react-router-dom';
+import { themeVar } from './context/apollo';
+import { useAuth } from './context/auth';
+import { DefaultPage } from './routes/default/DefaultPage';
 
 // Routes
-import HomePage from "./routes/home/HomePage";
-import LoginPage from "./routes/login/LoginPage";
+import HomePage from './routes/home/HomePage';
+import LoginPage from './routes/login/LoginPage';
 
 function App() {
   const auth = useAuth();
@@ -39,7 +39,7 @@ function App() {
         <Route
           path="**"
           render={() =>
-            auth.token === "" ? (
+            auth.token === '' ? (
               <Redirect to="/login"></Redirect>
             ) : (
               <Redirect to="/home"></Redirect>
@@ -57,7 +57,7 @@ function ProtectedRoutes({ children }) {
   return (
     <Route
       render={() =>
-        auth.token === "" ? <Redirect to="/login"></Redirect> : children
+        auth.token === '' ? <Redirect to="/login"></Redirect> : children
       }
     ></Route>
   );

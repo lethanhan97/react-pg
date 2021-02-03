@@ -2,14 +2,14 @@ import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
-  makeVar,
-} from "@apollo/client";
+  makeVar
+} from '@apollo/client';
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
-const themeVar = makeVar("light");
+const themeVar = makeVar('light');
 
 const ApolloWrapperProvider = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
